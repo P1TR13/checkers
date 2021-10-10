@@ -98,7 +98,150 @@ function createPawns(){
 let moving = 0
 
 function movingPawns() {
+    
 
+
+    // moving = 0
+    // let pawns = document.querySelectorAll(".pole")
+    // pawns.forEach(pawn => pawn.addEventListener('click', function move() {
+    //     if ((info[pawn.id[1]][pawn.id[2]] === 'b') || (info [pawn.id[1]][pawn.id[2]] === 'c')){
+    //         let op1 = parseInt(pawn.id[1])-1
+    //         let op2 = parseInt(pawn.id[2])-1
+    //         let op3 = parseInt(pawn.id[1])+1
+    //         let op4 = parseInt(pawn.id[2])+1
+    //         if ((info[op3][op2] === '0') || (info[op3][op4] === '0')){
+    //             if (moving === 0) {
+    //                 moving = 1
+
+
+    //                 if (info[pawn.id[1]][pawn.id[2]] === 'b') {
+    //                     //nowClicked = pawn.id[1] + pawn.id[2]
+    //                     console.log("Biały pion!")
+                        
+    //                     /*if (info[op1][op2] === '0') {
+    //                         console.log("Można zagrać na pole " + op1 + op2)
+    //                         //info[op1][op2] = 'b'
+    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                     }
+    //                     if (info[op1][op4] === '0') {
+    //                         console.log("Można zagrać na pole " + op1 + op4)
+    //                         //info[op1][op4] = 'b'
+    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                     }*/
+    //                     if ((info[op3][op2] === '0') && (info[op3][op4] === '0')) {
+    //                         if (info[op3][op2] === '0') {
+    //                             console.log("Można zagrać na pole " + op3 + op2)
+    //                             boxes[op3][op2].classList.add("fioletowePole")
+    //                             boxes[op3][op2].addEventListener('click', function click(){
+    //                                 if (boxes[op3][op2].classList.contains("fioletowePole")){
+    //                                     info[op3][op2] = 'b'
+    //                                     info[pawn.id[1]][pawn.id[2]] = '0'
+                                        
+    //                                     boxes[op3][op2].classList.remove("fioletowePole")
+    //                                     boxes[op3][op4].classList.remove("fioletowePole")
+    //                                     //deleteBoard()
+    //                                     //createBoard()
+    //                                     //gettingBoxes()
+    //                                     deletePawns()
+    //                                     createPawns()
+    //                                     movingPawns()
+    //                                     //boxes[op3][op4].removeEventListener('click', click)
+    //                                     //boxes[op3][op2].removeEventListener('click', click)
+    //                                     moving = 0
+    //                                     //pawns.forEach(pawn => pawn.removeEventListener('click', click))
+    //                                 }
+                                    
+    //                             })
+    //                             //info[op3][op2] = 'b'
+    //                             //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                         }
+    //                         if (info[op3][op4] === '0') {
+    //                             console.log("Można zagrać na pole " + op3 + op4)
+    //                             boxes[op3][op4].classList.add("fioletowePole")
+    //                             boxes[op3][op4].addEventListener('click', function click(){
+    //                                 if (boxes[op3][op2].classList.contains("fioletowePole")){
+    //                                     info[op3][op4] = 'b'
+    //                                     info[pawn.id[1]][pawn.id[2]] = '0'
+                                        
+    //                                     boxes[op3][op2].classList.remove("fioletowePole")
+    //                                     boxes[op3][op4].classList.remove("fioletowePole")
+    //                                     //deleteBoard()
+    //                                     //createBoard()
+    //                                     //gettingBoxes()
+    //                                     deletePawns()
+    //                                     createPawns()
+    //                                     movingPawns()
+    //                                     //boxes[op3][op4].removeEventListener('click', click)
+    //                                     //boxes[op3][op2].removeEventListener('click', click)
+    //                                     moving = 0
+    //                                 }
+    //                             })
+    //                             //info[op3][op4] = 'b'
+    //                             //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                         }
+    //                     }
+
+    //                     else if (info[op3][op2] === '0') {
+    //                         console.log("Można zagrać na pole " + op3 + op2)
+    //                         boxes[op3][op2].classList.add("fioletowePole")
+    //                         boxes[op3][op2].addEventListener('click', function click(){
+    //                             if (boxes[op3][op2].classList.contains("fioletowePole")){
+    //                                 info[op3][op2] = 'b'
+    //                                 info[pawn.id[1]][pawn.id[2]] = '0'
+                                    
+    //                                 boxes[op3][op2].classList.remove("fioletowePole")
+    //                                 boxes[op3][op4].classList.remove("fioletowePole")
+    //                                 //deleteBoard()
+    //                                 //createBoard()
+    //                                 //gettingBoxes()
+    //                                 deletePawns()
+    //                                 createPawns()
+    //                                 movingPawns()
+    //                                 boxes[op3][op4].removeEventListener('click', click)
+    //                                 boxes[op3][op2].removeEventListener('click', click)
+    //                                 moving = 0
+    //                                 //pawns.forEach(pawn => pawn.removeEventListener('click', click))
+    //                             }
+                                
+    //                         })
+    //                         //info[op3][op2] = 'b'
+    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                     }
+
+    //                     else if (info[op3][op4] === '0') {
+    //                         console.log("Można zagrać na pole " + op3 + op4)
+    //                         boxes[op3][op4].classList.add("fioletowePole")
+    //                         boxes[op3][op4].addEventListener('click', function click(){
+    //                             if (boxes[op3][op2].classList.contains("fioletowePole")){
+    //                                 info[op3][op4] = 'b'
+    //                                 info[pawn.id[1]][pawn.id[2]] = '0'
+                                    
+    //                                 boxes[op3][op2].classList.remove("fioletowePole")
+    //                                 boxes[op3][op4].classList.remove("fioletowePole")
+    //                                 //deleteBoard()
+    //                                 //createBoard()
+    //                                 //gettingBoxes()
+    //                                 deletePawns()
+    //                                 createPawns()
+    //                                 movingPawns()
+    //                                 boxes[op3][op4].removeEventListener('click', click)
+    //                                 boxes[op3][op2].removeEventListener('click', click)
+    //                                 moving = 0
+    //                             }
+    //                         })
+    //                         //info[op3][op4] = 'b'
+    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
+    //                     }
+    //                 }
+    //                 if (info [pawn.id[1]][pawn.id[2]] === 'c') {
+    //                     console.log("Czarny pion!")
+    //                 }
+    //                 console.log(info)
+    //             }
+    //         }
+
+    //     }
+    // }))
 }
 
 
