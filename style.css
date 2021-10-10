@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+#plansza {
+    width: 560px;
+    height: 560px;
+    display: grid;
+    grid-template-columns: 70px 70px 70px 70px 70px 70px 70px 70px;
+    grid-template-rows: 70px 70px 70px 70px 70px 70px 70px 70px;
+    justify-content: center;
+    border: 5px solid black;
+}
+
+.pole {
+    width: 70px;
+    height: 70px;
+
+}
+
+.czarne {
+    background-color: black;
+}
+
+.biale {
+    background-color: white;
+}
+
+.bialyPion {
+    background-color: #b3b3b3;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.czarnyPion {
+    background-color: #363636;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.fioletowePole {
+    background-color: violet;
+}
