@@ -1,7 +1,9 @@
 let board = document.querySelector("#plansza")
 let amountOfSquares = 64
 let game = 1
+let whoMoves = 0
 
+var usedSquares = []
 
 let info = [['1','1','1','1','1','1','1','1','1','1'],
             ['1','0','b','0','b','0','b','0','b','1'],
@@ -82,6 +84,7 @@ function createPawns(){
 
                 let pawnW = document.createElement("div")
                 pawnW.setAttribute("class", "pion bialyPion")
+                pawnW.setAttribute("id", "w" + i.toString() + j.toString())
 
                 boxes[i][j].appendChild(pawnW)
             }
@@ -89,6 +92,8 @@ function createPawns(){
 
                 let pawnB = document.createElement("div");
                 pawnB.setAttribute("class", "pion czarnyPion");
+                pawnB.setAttribute("id", "b" + i.toString() + j.toString())
+
                 boxes[i][j].appendChild(pawnB)
             }
         }
@@ -97,151 +102,74 @@ function createPawns(){
 
 let moving = 0
 
-function movingPawns() {
+function square() {
+    console.log("ruch")
+}
+
+function move(color, pion) {
+    console.log(pion.id)
+    let y
+    if (color === "b"){
+        y = parseInt(pion.id[1]) + 1
+    }
+    if (color === "c") {
+        y = parseInt(pion.id[1]) - 1
+    }
+    let x = parseInt(pion.id[2])
+
+    console.log("Gdzie moze ruszyc")
+
+    let pomocniczePole
+    
+    while (usedSquares.length !== 0) {
+        pomocniczePole = document.querySelector(usedSquares.pop())
+        pomocniczePole.classList.remove("fioletowePole")
+    }
     
 
+    if (info[y][x + 1] === "0") {
+        let pole1 = document.querySelector("#p" + (y) + (x + 1))
+        pole1.classList.add("fioletowePole")
 
-    // moving = 0
-    // let pawns = document.querySelectorAll(".pole")
-    // pawns.forEach(pawn => pawn.addEventListener('click', function move() {
-    //     if ((info[pawn.id[1]][pawn.id[2]] === 'b') || (info [pawn.id[1]][pawn.id[2]] === 'c')){
-    //         let op1 = parseInt(pawn.id[1])-1
-    //         let op2 = parseInt(pawn.id[2])-1
-    //         let op3 = parseInt(pawn.id[1])+1
-    //         let op4 = parseInt(pawn.id[2])+1
-    //         if ((info[op3][op2] === '0') || (info[op3][op4] === '0')){
-    //             if (moving === 0) {
-    //                 moving = 1
+        usedSquares.push("#p" + (y) + (x + 1))
+    }
+    if (info[y][x - 1] === "0") {
+        let pole2 = document.querySelector("#p" + (y) + (x - 1))
+        pole2.classList.add("fioletowePole")
 
+        usedSquares.push("#p" + (y) + (x - 1))
+    }
 
-    //                 if (info[pawn.id[1]][pawn.id[2]] === 'b') {
-    //                     //nowClicked = pawn.id[1] + pawn.id[2]
-    //                     console.log("Biały pion!")
-                        
-    //                     /*if (info[op1][op2] === '0') {
-    //                         console.log("Można zagrać na pole " + op1 + op2)
-    //                         //info[op1][op2] = 'b'
-    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                     }
-    //                     if (info[op1][op4] === '0') {
-    //                         console.log("Można zagrać na pole " + op1 + op4)
-    //                         //info[op1][op4] = 'b'
-    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                     }*/
-    //                     if ((info[op3][op2] === '0') && (info[op3][op4] === '0')) {
-    //                         if (info[op3][op2] === '0') {
-    //                             console.log("Można zagrać na pole " + op3 + op2)
-    //                             boxes[op3][op2].classList.add("fioletowePole")
-    //                             boxes[op3][op2].addEventListener('click', function click(){
-    //                                 if (boxes[op3][op2].classList.contains("fioletowePole")){
-    //                                     info[op3][op2] = 'b'
-    //                                     info[pawn.id[1]][pawn.id[2]] = '0'
-                                        
-    //                                     boxes[op3][op2].classList.remove("fioletowePole")
-    //                                     boxes[op3][op4].classList.remove("fioletowePole")
-    //                                     //deleteBoard()
-    //                                     //createBoard()
-    //                                     //gettingBoxes()
-    //                                     deletePawns()
-    //                                     createPawns()
-    //                                     movingPawns()
-    //                                     //boxes[op3][op4].removeEventListener('click', click)
-    //                                     //boxes[op3][op2].removeEventListener('click', click)
-    //                                     moving = 0
-    //                                     //pawns.forEach(pawn => pawn.removeEventListener('click', click))
-    //                                 }
-                                    
-    //                             })
-    //                             //info[op3][op2] = 'b'
-    //                             //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                         }
-    //                         if (info[op3][op4] === '0') {
-    //                             console.log("Można zagrać na pole " + op3 + op4)
-    //                             boxes[op3][op4].classList.add("fioletowePole")
-    //                             boxes[op3][op4].addEventListener('click', function click(){
-    //                                 if (boxes[op3][op2].classList.contains("fioletowePole")){
-    //                                     info[op3][op4] = 'b'
-    //                                     info[pawn.id[1]][pawn.id[2]] = '0'
-                                        
-    //                                     boxes[op3][op2].classList.remove("fioletowePole")
-    //                                     boxes[op3][op4].classList.remove("fioletowePole")
-    //                                     //deleteBoard()
-    //                                     //createBoard()
-    //                                     //gettingBoxes()
-    //                                     deletePawns()
-    //                                     createPawns()
-    //                                     movingPawns()
-    //                                     //boxes[op3][op4].removeEventListener('click', click)
-    //                                     //boxes[op3][op2].removeEventListener('click', click)
-    //                                     moving = 0
-    //                                 }
-    //                             })
-    //                             //info[op3][op4] = 'b'
-    //                             //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                         }
-    //                     }
+}
 
-    //                     else if (info[op3][op2] === '0') {
-    //                         console.log("Można zagrać na pole " + op3 + op2)
-    //                         boxes[op3][op2].classList.add("fioletowePole")
-    //                         boxes[op3][op2].addEventListener('click', function click(){
-    //                             if (boxes[op3][op2].classList.contains("fioletowePole")){
-    //                                 info[op3][op2] = 'b'
-    //                                 info[pawn.id[1]][pawn.id[2]] = '0'
-                                    
-    //                                 boxes[op3][op2].classList.remove("fioletowePole")
-    //                                 boxes[op3][op4].classList.remove("fioletowePole")
-    //                                 //deleteBoard()
-    //                                 //createBoard()
-    //                                 //gettingBoxes()
-    //                                 deletePawns()
-    //                                 createPawns()
-    //                                 movingPawns()
-    //                                 boxes[op3][op4].removeEventListener('click', click)
-    //                                 boxes[op3][op2].removeEventListener('click', click)
-    //                                 moving = 0
-    //                                 //pawns.forEach(pawn => pawn.removeEventListener('click', click))
-    //                             }
-                                
-    //                         })
-    //                         //info[op3][op2] = 'b'
-    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                     }
+function whiteToMove() {
+    let whitePawns = document.querySelectorAll(".bialyPion")
+    whitePawns.forEach(pawn => pawn.addEventListener('click', function() {
+        move("b", pawn)
+    
+    }))
+}
 
-    //                     else if (info[op3][op4] === '0') {
-    //                         console.log("Można zagrać na pole " + op3 + op4)
-    //                         boxes[op3][op4].classList.add("fioletowePole")
-    //                         boxes[op3][op4].addEventListener('click', function click(){
-    //                             if (boxes[op3][op2].classList.contains("fioletowePole")){
-    //                                 info[op3][op4] = 'b'
-    //                                 info[pawn.id[1]][pawn.id[2]] = '0'
-                                    
-    //                                 boxes[op3][op2].classList.remove("fioletowePole")
-    //                                 boxes[op3][op4].classList.remove("fioletowePole")
-    //                                 //deleteBoard()
-    //                                 //createBoard()
-    //                                 //gettingBoxes()
-    //                                 deletePawns()
-    //                                 createPawns()
-    //                                 movingPawns()
-    //                                 boxes[op3][op4].removeEventListener('click', click)
-    //                                 boxes[op3][op2].removeEventListener('click', click)
-    //                                 moving = 0
-    //                             }
-    //                         })
-    //                         //info[op3][op4] = 'b'
-    //                         //info[pawn.id[1]][pawn.id[2]] = '0'
-    //                     }
-    //                 }
-    //                 if (info [pawn.id[1]][pawn.id[2]] === 'c') {
-    //                     console.log("Czarny pion!")
-    //                 }
-    //                 console.log(info)
-    //             }
-    //         }
+function blackToMove() {
+    let blackPawns = document.querySelectorAll(".czarnyPion")
+    blackPawns.forEach(pawn => pawn.addEventListener('click', function(){
+        move("c", pawn)
+    }))
+}
 
-    //     }
-    // }))
+function movingPawns() {
+    console.log("czyj ruch " + whoMoves)
+    if (whoMoves % 2 === 0) {
+        whiteToMove()
+        console.log("biale")
+    }
+    else if (whoMoves % 2 === 1) {
+        blackToMove()
+        console.log("czarne")
+    }
+
+    whoMoves++
+    console.log("czyj ruch " + whoMoves)
 }
 
 
