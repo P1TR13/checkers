@@ -84,7 +84,7 @@ function createPawns(){
 
                 let pawnW = document.createElement("div")
                 pawnW.setAttribute("class", "pion bialyPion")
-                pawnW.setAttribute("id", "w" + i.toString() + j.toString())
+                pawnW.setAttribute("id", "b" + i.toString() + j.toString())
 
                 boxes[i][j].appendChild(pawnW)
             }
@@ -92,7 +92,7 @@ function createPawns(){
 
                 let pawnB = document.createElement("div");
                 pawnB.setAttribute("class", "pion czarnyPion");
-                pawnB.setAttribute("id", "b" + i.toString() + j.toString())
+                pawnB.setAttribute("id", "c" + i.toString() + j.toString())
 
                 boxes[i][j].appendChild(pawnB)
             }
@@ -100,76 +100,92 @@ function createPawns(){
     }
 }
 
-let moving = 0
+let isMoving = 0
 
-function square() {
-    console.log("ruch")
-}
+let lastTouchedPawn
 
-function move(color, pion) {
-    console.log(pion.id)
-    let y
-    if (color === "b"){
-        y = parseInt(pion.id[1]) + 1
+function move(color, square){
+    pole = square.id
+
+    if (info[pole[1]][pole[2]] === color) {
+        lastTouchedPawn = color + pole[1].toString() + pole[2].toString()
+
+        let y
+        if (color === "b"){
+            y = parseInt(pole[1]) + 1
+        }
+        if (color === "c") {
+            y = parseInt(pole[1]) - 1
+        }
+        let x = parseInt(pole[2])
+
+        
+        
+
+        let pomocniczePole
+        
+        while (usedSquares.length !== 0) {
+            pomocniczePole = document.querySelector(usedSquares.pop())
+            pomocniczePole.classList.remove("fioletowePole")
+        }
+        
+
+        if (info[y][x + 1] === "0") {
+            let pole1 = document.querySelector("#p" + (y) + (x + 1))
+            pole1.classList.add("fioletowePole")
+
+            usedSquares.push("#p" + (y) + (x + 1))
+        }
+        if (info[y][x - 1] === "0") {
+            let pole2 = document.querySelector("#p" + (y) + (x - 1))
+            pole2.classList.add("fioletowePole")
+
+            usedSquares.push("#p" + (y) + (x - 1))
+        }
     }
-    if (color === "c") {
-        y = parseInt(pion.id[1]) - 1
+
+    if (square.classList.contains("fioletowePole")) {
+        let pawn = document.createElement("div")
+        
+        if (whoMoves % 2 === 0) {
+            pawn.setAttribute("class", "pion bialyPion")
+            pawn.setAttribute("id", "b" + pole[1].toString() + pole[2].toString())
+            info[square.id[1]][square.id[2]] = "b"
+        } else {
+            pawn.setAttribute("class", "pion czarnyPion")
+            pawn.setAttribute("id", "c" + pole[1].toString() + pole[2].toString())
+            info[square.id[1]][square.id[2]] = "c"
+        }
+        
+        info[lastTouchedPawn[1]][lastTouchedPawn[2]] = "0"
+        
+        var pawnToRemove = document.getElementById(lastTouchedPawn)
+        pawnToRemove.remove()
+
+        square.appendChild(pawn)
+
+        whoMoves++
+
+        while (usedSquares.length !== 0) {
+            pomocniczePole = document.querySelector(usedSquares.pop())
+            pomocniczePole.classList.remove("fioletowePole")
+        }
     }
-    let x = parseInt(pion.id[2])
-
-    console.log("Gdzie moze ruszyc")
-
-    let pomocniczePole
-    
-    while (usedSquares.length !== 0) {
-        pomocniczePole = document.querySelector(usedSquares.pop())
-        pomocniczePole.classList.remove("fioletowePole")
-    }
-    
-
-    if (info[y][x + 1] === "0") {
-        let pole1 = document.querySelector("#p" + (y) + (x + 1))
-        pole1.classList.add("fioletowePole")
-
-        usedSquares.push("#p" + (y) + (x + 1))
-    }
-    if (info[y][x - 1] === "0") {
-        let pole2 = document.querySelector("#p" + (y) + (x - 1))
-        pole2.classList.add("fioletowePole")
-
-        usedSquares.push("#p" + (y) + (x - 1))
-    }
-
-}
-
-function whiteToMove() {
-    let whitePawns = document.querySelectorAll(".bialyPion")
-    whitePawns.forEach(pawn => pawn.addEventListener('click', function() {
-        move("b", pawn)
-    
-    }))
-}
-
-function blackToMove() {
-    let blackPawns = document.querySelectorAll(".czarnyPion")
-    blackPawns.forEach(pawn => pawn.addEventListener('click', function(){
-        move("c", pawn)
-    }))
 }
 
 function movingPawns() {
-    console.log("czyj ruch " + whoMoves)
-    if (whoMoves % 2 === 0) {
-        whiteToMove()
-        console.log("biale")
-    }
-    else if (whoMoves % 2 === 1) {
-        blackToMove()
-        console.log("czarne")
-    }
+    let squares = document.querySelectorAll(".czarne")
+    let pawnColor;
+    squares.forEach(square => square.addEventListener('click', function() {
+        if (whoMoves % 2 === 0) {
+            pawnColor = "b";
+        } else {
+            pawnColor = "c";
+        }
 
-    whoMoves++
-    console.log("czyj ruch " + whoMoves)
+        
+        move(pawnColor, square)
+    }))
 }
 
 
