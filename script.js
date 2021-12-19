@@ -241,6 +241,7 @@ function move(color, square) {
             let first = (parseInt(square.id[1]) + parseInt(lastTouchedPawn[1]))/2
             var object = document.getElementById(opponentColor + first.toString() + second.toString())
             info[first][second] = "0"
+
             if (opponentColor === "b") {
                 let whitePawnCaptured = document.createElement("div")
                 whitePawnCaptured.classList.add("zbityBialyPion")
@@ -253,6 +254,7 @@ function move(color, square) {
                 blackCaptured.appendChild(blackPawnCaptured)
                 howManyBlack++
             }
+
             object.remove()
             isCapturing = 1
             capturingPawn = square.id[1] + square.id[2]
