@@ -8,7 +8,7 @@ body {
 
 #siatka {
     display: grid;
-    grid-template-rows: 0px 50px auto 50px 10px;
+    grid-template-rows: 0px 50px auto 50px 30px;
     grid-gap: 10px;
 }
 
@@ -44,6 +44,11 @@ body {
     border: 5px solid #815d39;
 }
 
+#zbite {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
 .pole {
     width: 70px;
     height: 70px;
@@ -74,6 +79,20 @@ body {
     border: 2px solid rgb(39, 39, 39);
 }
 
+.zbityBialyPion {
+    background-color: #efdcc9;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgb(39, 39, 39);
+}
+
+#zbiteBiale {
+    display: grid;
+    grid-template-rows: 30px;
+    grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
+}
+
 .bialyPion:hover {
     cursor: pointer;
 }
@@ -84,6 +103,20 @@ body {
     height: 50px;
     border-radius: 50%;
     border: 2px solid #000;
+}
+
+.zbityCzarnyPion {
+    background-color: #161311;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #000;
+}
+
+#zbiteCzarne {
+    display: grid;
+    grid-template-rows: 30px;
+    grid-template-columns: 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px 15px;
 }
 
 .czarnyPion:hover {
