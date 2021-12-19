@@ -167,6 +167,8 @@ function move(color, square) {
         if (info[pole[1]][pole[2]] === color) {
             lastTouchedPawn = color + pole[1].toString() + pole[2].toString()
     
+            var isQueen = document.getElementById(lastTouchedPawn)
+
             let y
             if (color === "b"){
                 y = parseInt(pole[1]) + 1
@@ -198,6 +200,37 @@ function move(color, square) {
     
                 usedSquares.push("#p" + (y) + (x - 1))
             }
+
+            if (isQueen.classList.contains("bialaDama")) {
+                if (info[y - 2][x + 1] === "0") {
+                    let pole1 = document.querySelector("#p" + (y - 2) + (x + 1))
+                    pole1.classList.add("fioletowePole")
+        
+                    usedSquares.push("#p" + (y - 2) + (x + 1))
+                } 
+    
+                if (info[y - 2][x - 1] === "0") {
+                    let pole2 = document.querySelector("#p" + (y - 2) + (x - 1))
+                    pole2.classList.add("fioletowePole")
+        
+                    usedSquares.push("#p" + (y - 2) + (x - 1))
+                }
+            }
+            if (isQueen.classList.contains("czarnaDama")) {
+                if (info[y + 2][x + 1] === "0") {
+                    let pole1 = document.querySelector("#p" + (y + 2) + (x + 1))
+                    pole1.classList.add("fioletowePole")
+        
+                    usedSquares.push("#p" + (y + 2) + (x + 1))
+                } 
+    
+                if (info[y + 2][x - 1] === "0") {
+                    let pole2 = document.querySelector("#p" + (y + 2) + (x - 1))
+                    pole2.classList.add("fioletowePole")
+        
+                    usedSquares.push("#p" + (y + 2) + (x - 1))
+                }
+            }
     
             let pole1 = parseInt(pole[1])
             let pole2 = parseInt(pole[2])
@@ -223,6 +256,14 @@ function move(color, square) {
         info[lastTouchedPawn[1]][lastTouchedPawn[2]] = "0"
         
         var pawnToRemove = document.getElementById(lastTouchedPawn)
+
+        if (pawnToRemove.classList.contains("bialaDama")) {
+            pawn.classList.add("bialaDama")
+        }
+        if (pawnToRemove.classList.contains("czarnaDama")) {
+            pawn.classList.add("czarnaDama")
+        }
+
         pawnToRemove.remove()
 
         square.appendChild(pawn)
@@ -241,7 +282,6 @@ function move(color, square) {
             let first = (parseInt(square.id[1]) + parseInt(lastTouchedPawn[1]))/2
             var object = document.getElementById(opponentColor + first.toString() + second.toString())
             info[first][second] = "0"
-
             if (opponentColor === "b") {
                 let whitePawnCaptured = document.createElement("div")
                 whitePawnCaptured.classList.add("zbityBialyPion")
@@ -254,7 +294,6 @@ function move(color, square) {
                 blackCaptured.appendChild(blackPawnCaptured)
                 howManyBlack++
             }
-
             object.remove()
             isCapturing = 1
             capturingPawn = square.id[1] + square.id[2]
@@ -263,7 +302,6 @@ function move(color, square) {
     }
 
     if ((isCapturing === 1) && (info[pole[1]][pole[2]] === color) && (capturingPawn === square.id[1] + square.id[2])) {
-        console.log("ok")
         let pole1 = parseInt(square.id[1])
         let pole2 = parseInt(square.id[2])
         if (((info[pole1 - 1][pole2 - 1] === opponentColor) && (info[pole1 - 2][pole2 - 2] === "0")) || ((info[pole1 + 1][pole2 - 1] === opponentColor) && (info[pole1 + 2][pole2 - 2] === "0")) || ((info[pole1 - 1][pole2 + 1] === opponentColor) && (info[pole1 - 2][pole2 + 2] === "0")) || ((info[pole1 + 1][pole2 + 1] === opponentColor) && (info[pole1 + 2][pole2 + 2] === "0"))) {
@@ -273,6 +311,15 @@ function move(color, square) {
         } else {
             isCapturing = 0
         }
+    }
+
+    if (color === "b" && square.id[1] === "8" && isCapturing === 0) {
+        let newPawn = document.querySelector("#b" + square.id[1] + square.id[2])
+        newPawn.classList.add("bialaDama")
+    }
+    if (color === "c" && square.id[1] === "1" && isCapturing === 0) {
+        let newPawn = document.querySelector("#c" + square.id[1] + square.id[2])
+        newPawn.classList.add("czarnaDama")
     }
 }
 
@@ -295,8 +342,6 @@ function movingPawns() {
             document.getElementById("ruch").innerHTML = "BLACK";
         }
 
-        console.log("black " + howManyBlack)
-        console.log("white " + howManyWhite)
         if (howManyWhite === 12) {
             document.getElementById("ruch").innerHTML = "BLACK WON!";
         }
