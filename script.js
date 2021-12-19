@@ -307,7 +307,12 @@ function move(color, square) {
         if (((info[pole1 - 1][pole2 - 1] === opponentColor) && (info[pole1 - 2][pole2 - 2] === "0")) || ((info[pole1 + 1][pole2 - 1] === opponentColor) && (info[pole1 + 2][pole2 - 2] === "0")) || ((info[pole1 - 1][pole2 + 1] === opponentColor) && (info[pole1 - 2][pole2 + 2] === "0")) || ((info[pole1 + 1][pole2 + 1] === opponentColor) && (info[pole1 + 2][pole2 + 2] === "0"))) {
             lastTouchedPawn = color + capturingPawn
             capture (opponentColor, square.id)
-            whoMoves++
+            if (whichColorIsCapturing === "b") {
+                whoMoves = 0
+            }
+            if (whichColorIsCapturing === "c") {
+                whoMoves = 1
+            }
         } else {
             isCapturing = 0
         }
